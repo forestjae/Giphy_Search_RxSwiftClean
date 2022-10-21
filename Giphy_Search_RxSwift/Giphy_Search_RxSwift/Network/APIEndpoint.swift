@@ -1,5 +1,5 @@
 //
-//  APIEndpoint.swift
+//  Endpoint.swift
 //  Giphy_Search_RxSwift
 //
 //  Created by Lee Seung-Jae on 2022/09/18.
@@ -14,8 +14,9 @@ protocol APIEndpoint {
     var baseURL: URL? { get }
     var path: String { get }
     var url: URL? { get }
-    var parameters: [String: String] { get }
     var headers: [String: String]? { get }
+    var queries: [String: String] { get }
+    var body: Data? { get }
 }
 
 extension APIEndpoint {
@@ -24,7 +25,7 @@ extension APIEndpoint {
             return nil
         }
         var urlComponents = URLComponents(string: url.absoluteString)
-        let urlQuries = self.parameters.map { key, value in
+        let urlQuries = self.queries.map { key, value in
             URLQueryItem(name: key, value: value)
         }
 
@@ -47,5 +48,32 @@ extension APIEndpoint {
         }
 
         return request
+    }
+}
+
+protocol APIGetRequest: APIEndpoint { }
+
+extension APIGetRequest {
+    var method: HTTPMethod {
+        .get
+    }
+
+    var body: Data? {
+        return nil
+    }
+}
+
+protocol APIPostRequest: APIEndpoint {
+    var parameters: [String: Any] { get }
+
+}
+
+extension APIPostRequest {
+    var method: HTTPMethod {
+        .post
+    }
+
+    var body: Data? {
+        try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
     }
 }
