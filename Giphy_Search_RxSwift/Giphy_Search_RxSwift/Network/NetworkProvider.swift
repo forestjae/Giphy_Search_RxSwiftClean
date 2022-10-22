@@ -9,5 +9,8 @@ import Foundation
 
 protocol NetworkProvider {
     var session: URLSession { get }
+    func request<T: APIEndpoint>(
+        _ request: T,
+        completion: @escaping (Result<T.APIResponse,NetworkError>) -> Void
+    ) -> Cancellable?
 }
-
