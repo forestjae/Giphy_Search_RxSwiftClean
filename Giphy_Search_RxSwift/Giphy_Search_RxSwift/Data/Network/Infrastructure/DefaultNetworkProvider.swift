@@ -12,13 +12,13 @@ final class DefaultNetworkProvider: NetworkProvider {
 
     func request<T: APIEndpoint>(
         _ request: T,
-        completion: @escaping (Result<T.APIResponse,NetworkError>) -> Void
+        completion: @escaping (Result<T.APIResponse, NetworkError>) -> Void
     ) -> Cancellable? {
         guard let urlRequest = request.urlReqeust else {
             completion(.failure(NetworkError.invalidRequest))
             return nil
         }
-        
+
         let task = self.session.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
                 completion(.failure(.serverError(description: error.localizedDescription)))

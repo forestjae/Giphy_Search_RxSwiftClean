@@ -50,30 +50,3 @@ extension APIEndpoint {
         return request
     }
 }
-
-protocol APIGetRequest: APIEndpoint { }
-
-extension APIGetRequest {
-    var method: HTTPMethod {
-        .get
-    }
-
-    var body: Data? {
-        return nil
-    }
-}
-
-protocol APIPostRequest: APIEndpoint {
-    var parameters: [String: Any] { get }
-
-}
-
-extension APIPostRequest {
-    var method: HTTPMethod {
-        .post
-    }
-
-    var body: Data? {
-        try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-    }
-}
