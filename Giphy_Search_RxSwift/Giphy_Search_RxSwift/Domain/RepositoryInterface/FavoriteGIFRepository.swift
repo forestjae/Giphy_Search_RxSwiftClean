@@ -11,9 +11,9 @@ import RxSwift
 protocol FavoriteGIFRepository {
     func fetchFavorites() -> Single<[String]>
 
-    func isFavorite(of identifier: String) -> Observable<Bool>
+    func isFavorite(of identifier: String) -> Single<Bool>
 
-    func setFavorite(for identifier: String) -> Completable
+    func setFavorite(for identifier: String, createdAt date: Date) -> Completable
 
     func setUnfavorite(for identifier: String) -> Completable
 }
