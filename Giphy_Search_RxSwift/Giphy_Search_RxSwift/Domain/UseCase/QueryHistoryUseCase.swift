@@ -9,11 +9,11 @@ import Foundation
 import RxSwift
 
 protocol QueryHistoryUseCase {
-    func fetchQueryHistory(type: GIFType, query: String, offset: Int) -> Observable<[String]>
+    func fetchQueryHistory(type: GIFType, query: String, offset: Int) -> Single<[String]>
 
-    func saveQuery(of query: String, identifier: String) -> Completable
+    func saveQuery(of query: String) -> Completable
 
-    func removeQuery(of query: String, identifier: String) -> Completable
+    func removeQuery(of query: String) -> Completable
 }
 
 class DefaultQueryHistoryUseCase: QueryHistoryUseCase {
@@ -23,15 +23,15 @@ class DefaultQueryHistoryUseCase: QueryHistoryUseCase {
         self.queryHistoryRepository = queryHistoryRepository
     }
 
-    func fetchQueryHistory(type: GIFType, query: String, offset: Int) -> Observable<[String]> {
+    func fetchQueryHistory(type: GIFType, query: String, offset: Int) -> Single<[String]> {
         return self.queryHistoryRepository.fetchQueryHistory()
     }
 
-    func saveQuery(of query: String, identifier: String) -> Completable {
-        return self.saveQuery(of: query, identifier: identifier)
+    func saveQuery(of query: String) -> Completable {
+        return self.queryHistoryRepository.saveQuery(of: query, createdAt: Date())
     }
 
-    func removeQuery(of query: String, identifier: String) -> Completable {
-        return self.removeQuery(of: query, identifier: identifier)
+    func removeQuery(of query: String) -> Completable {
+        return self.queryHistoryRepository.removeQuery(of: query)
     }
 }
