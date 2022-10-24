@@ -28,4 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             sessionRole: connectingSceneSession.role
         )
     }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        try? CoreDataProvider.shared.saveContext()
+    }
 }
