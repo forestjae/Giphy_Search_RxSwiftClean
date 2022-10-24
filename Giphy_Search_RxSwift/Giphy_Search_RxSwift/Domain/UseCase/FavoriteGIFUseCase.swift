@@ -11,7 +11,7 @@ import RxSwift
 protocol FavoriteGIFUseCase {
     func fetchFavorites() -> Single<[String]>
 
-    func isFavorite(of identifier: String) -> Observable<Bool>
+    func isFavorite(of identifier: String) -> Single<Bool>
 
     func setFavorite(for identifier: String) -> Completable
 
@@ -29,12 +29,12 @@ class DefaultFavoriteGIFUseCase: FavoriteGIFUseCase {
         self.favoriteGIFRepository.fetchFavorites()
     }
 
-    func isFavorite(of identifier: String) -> Observable<Bool> {
+    func isFavorite(of identifier: String) -> Single<Bool> {
         self.favoriteGIFRepository.isFavorite(of: identifier)
     }
 
     func setFavorite(for identifier: String) -> Completable {
-        self.favoriteGIFRepository.setFavorite(for: identifier)
+        self.favoriteGIFRepository.setFavorite(for: identifier, createdAt: Date())
     }
 
     func setUnfavorite(for identifier: String) -> Completable {
