@@ -9,9 +9,9 @@ import Foundation
 import RxSwift
 
 protocol QueryHistoryRepository {
-    func fetchQueryHistory() -> Observable<[String]>
+    func fetchQueryHistory() -> Single<[String]>
 
-    func saveQuery(of query: String, identifier: String) -> Completable
+    func saveQuery(of query: String, createdAt date: Date) -> Completable
 
-    func removeQuery(of query: String, identifier: String) -> Completable
+    func removeQuery(of query: String) -> Completable
 }
