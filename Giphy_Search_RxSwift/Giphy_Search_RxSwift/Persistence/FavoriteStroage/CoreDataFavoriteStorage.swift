@@ -45,8 +45,8 @@ class CoreDataFavoriteStorage: FavoriteStorage {
         }
     }
 
-    func setFavorite(for identifier: String, createdAt date: Date = Date()) -> Completable {
-        return Completable.create { completable in
+    func setFavorite(for identifier: String, createdAt date: Date = Date()) -> Single<Bool> {
+        return Single.create { single in
             do {
                 try self.coreDataProvider.create(
                     entityName: String(describing: Favorite.self),
@@ -55,18 +55,18 @@ class CoreDataFavoriteStorage: FavoriteStorage {
                         "createdAt" : date
                     ]
                 )
-                completable(.completed)
+                single(.success(true))
             } catch let error {
-                completable(.error(error))
+                single(.failure(error))
             }
             return Disposables.create()
         }
     }
 
-    func setUnfavorite(for identifier: String) -> Completable {
+    func setUnfavorite(for identifier: String) -> Single<Bool> {
         let predicate = NSPredicate(format: "identifier == %@", identifier)
 
-        return Completable.create { completable in
+        return Single.create { single in
             do {
                 let objects = try self.coreDataProvider.fetch(
                     request: Favorite.fetchRequest(),
@@ -77,9 +77,9 @@ class CoreDataFavoriteStorage: FavoriteStorage {
                     try self.coreDataProvider.delete(object: $0)
                 }
 
-                completable(.completed)
+                single(.success(false))
             } catch let error {
-                completable(.error(error))
+                single(.failure(error))
             }
             return Disposables.create()
         }

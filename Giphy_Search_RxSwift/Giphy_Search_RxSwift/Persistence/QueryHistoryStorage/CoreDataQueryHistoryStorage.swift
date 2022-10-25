@@ -26,6 +26,7 @@ class CoreDataQueryHistoryStorage: QueryHistoryStorage {
                     .compactMap { $0.query }
                 single(.success(result))
             } catch let error {
+                print(error)
                 single(.failure(error))
             }
             return Disposables.create()
