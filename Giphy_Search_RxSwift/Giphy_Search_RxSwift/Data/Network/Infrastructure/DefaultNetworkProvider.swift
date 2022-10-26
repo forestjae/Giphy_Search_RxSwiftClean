@@ -49,6 +49,7 @@ final class DefaultNetworkProvider: NetworkProvider {
                 return
             }
         }
+        task.resume()
 
         return task
     }
