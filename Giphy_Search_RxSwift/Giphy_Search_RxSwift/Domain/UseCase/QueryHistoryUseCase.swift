@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol QueryHistoryUseCase {
-    func fetchQueryHistory(type: GIFType, query: String, offset: Int) -> Single<[String]>
+    func fetchQueryHistory() -> Single<[String]>
 
     func saveQuery(of query: String) -> Completable
 
@@ -23,7 +23,7 @@ class DefaultQueryHistoryUseCase: QueryHistoryUseCase {
         self.queryHistoryRepository = queryHistoryRepository
     }
 
-    func fetchQueryHistory(type: GIFType, query: String, offset: Int) -> Single<[String]> {
+    func fetchQueryHistory() -> Single<[String]> {
         return self.queryHistoryRepository.fetchQueryHistory()
     }
 
