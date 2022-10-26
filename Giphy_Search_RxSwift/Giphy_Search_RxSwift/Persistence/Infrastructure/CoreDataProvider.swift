@@ -12,7 +12,7 @@ final class CoreDataProvider {
     static let shared = CoreDataProvider()
 
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Model")
+        let container = NSPersistentContainer(name: "CoreDataModel")
 
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {

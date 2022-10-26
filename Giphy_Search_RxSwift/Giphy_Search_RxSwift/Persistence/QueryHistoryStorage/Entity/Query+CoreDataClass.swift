@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(Entity)
+@objc(Query)
 public class Query: NSManagedObject {
 
 }

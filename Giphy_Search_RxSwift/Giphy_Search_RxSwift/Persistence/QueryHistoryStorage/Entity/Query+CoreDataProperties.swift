@@ -13,7 +13,7 @@ import CoreData
 extension Query {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Query> {
-        return NSFetchRequest<Query>(entityName: "Entity")
+        return NSFetchRequest<Query>(entityName: "Query")
     }
 
     @NSManaged public var query: String?
