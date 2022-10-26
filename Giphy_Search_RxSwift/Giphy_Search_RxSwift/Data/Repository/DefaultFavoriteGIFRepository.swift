@@ -23,11 +23,11 @@ class DefaultFavoriteGIFRepository: FavoriteGIFRepository {
         return self.favoriteStorage.isFavorite(of: identifier)
     }
 
-    func setFavorite(for identifier: String, createdAt date: Date) -> Completable {
+    func setFavorite(for identifier: String, createdAt date: Date) -> Single<Bool> {
         return self.favoriteStorage.setFavorite(for: identifier, createdAt: date)
     }
 
-    func setUnfavorite(for identifier: String) -> Completable {
+    func setUnfavorite(for identifier: String) -> Single<Bool> {
         return self.favoriteStorage.setUnfavorite(for: identifier)
     }
 }

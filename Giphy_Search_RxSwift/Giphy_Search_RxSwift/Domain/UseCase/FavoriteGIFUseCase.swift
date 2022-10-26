@@ -13,9 +13,9 @@ protocol FavoriteGIFUseCase {
 
     func isFavorite(of identifier: String) -> Single<Bool>
 
-    func setFavorite(for identifier: String) -> Completable
+    func setFavorite(for identifier: String) -> Single<Bool>
 
-    func setUnfavorite(for identifier: String) -> Completable
+    func setUnfavorite(for identifier: String) -> Single<Bool>
 }
 
 class DefaultFavoriteGIFUseCase: FavoriteGIFUseCase {
@@ -33,11 +33,11 @@ class DefaultFavoriteGIFUseCase: FavoriteGIFUseCase {
         self.favoriteGIFRepository.isFavorite(of: identifier)
     }
 
-    func setFavorite(for identifier: String) -> Completable {
+    func setFavorite(for identifier: String) -> Single<Bool> {
         self.favoriteGIFRepository.setFavorite(for: identifier, createdAt: Date())
     }
 
-    func setUnfavorite(for identifier: String) -> Completable {
+    func setUnfavorite(for identifier: String) -> Single<Bool> {
         self.favoriteGIFRepository.setUnfavorite(for: identifier)
     }
 }
