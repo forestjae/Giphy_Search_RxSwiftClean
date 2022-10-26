@@ -8,12 +8,12 @@
 import Foundation
 
 enum GIFType: String, CaseIterable {
-    case normal
+    case gif
     case sticker
 
     var description: String {
         switch self {
-        case .normal:
+        case .gif:
             return "GIF"
         case .sticker:
             return "Sticker"
@@ -25,7 +25,7 @@ extension GIFType {
     init?(index: Int) {
         switch index {
         case 0:
-            self = .normal
+            self = .gif
         case 1:
             self = .sticker
         default:

@@ -13,7 +13,7 @@ struct GIFSearchEndpoint: GiphyAPIEndpoint {
     let method: HTTPMethod = .get
     var path: String {
         switch self.type {
-        case .normal:
+        case .gif:
             return "gifs/search"
         case .sticker:
             return "stickers/search"
